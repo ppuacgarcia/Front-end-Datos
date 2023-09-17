@@ -8,10 +8,10 @@ const BarChart3 = () => {
     datasets: [
       {
         label: 'Datos 1',
-        backgroundColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(123, 0, 255, 1)',
         borderColor: 'rgba(0, 0, 0, 1)',
         borderWidth: 1,
-        data: [65, 59, 80, 81, 56],
+        data: [0, 0, 0, 0, 0],
       },
     ],
   };
@@ -31,7 +31,7 @@ const BarChart3 = () => {
   return (
     <div>
       <h2>Gráfica de Barras 3</h2>
-      <div style={{ width: '400px', height: '300px' }}>
+      <div style={{ width: '600px', height: '300px' }}>
         <Bar data={data} options={options} />
       </div>
     </div>

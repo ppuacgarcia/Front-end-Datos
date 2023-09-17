@@ -1,20 +1,33 @@
+/* App.css */
 .App {
   text-align: center;
 }
 
-h1 {
+h3 {
+  margin-top: 20px;
   color: #333;
 }
 
 .charts-container {
-  display: flex; /* Utilizamos flexbox para alinear horizontalmente los gráficos */
-  justify-content: space-around; /* Espaciado uniforme entre los gráficos */
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   margin-top: 20px;
 }
 
 .chart {
-  width: 30%; /* Ajusta el ancho de cada gráfico según tus necesidades */
+  width: calc(33.33% - 20px);
   background-color: #fff;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   padding: 20px;
+  margin: 10px;
 }
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
