@@ -5,6 +5,7 @@ import ComboBox from './ComboBox';
 import Chart from 'chart.js/auto';// no quitar esto de chart.js/auto porque sirve para  lo de category
 
 function App() {
+
   const [dynamoData, setDynamoData] = useState({
     labels: [],
     datasets: [
@@ -148,6 +149,77 @@ function App() {
   };
 
 
+// Barras Mongodb
+
+  const [MongodbData, setMongodbData] = useState({
+     labels: [],
+    datasets: [
+      {
+        label: 'Datos 1',
+        backgroundColor: 'rgba(255, 72, 0, 1)',
+        borderColor: 'rgba(0, 0, 0, 1)',
+        borderWidth: 1,
+        data: [],
+      },
+    ],
+  });
+
+  const [MongoOptions, setMongoOptions] = useState({
+    scales: {
+      x: {
+        type: 'category',
+        labels: [],
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  });
+
+  const onMongodb = async() =>{
+    try {
+      if (!selectedValue) {
+        console.error('Ninguna opción seleccionada');
+        return;
+      }
+      
+      // Aquí deberías obtener los datos de tu API
+      const response = await fetch(`http://localhost:4000/api/mysql/${selectedValue.value}`);
+      const data = await response.json();
+      
+      const labels = Object.keys(data);
+      const values = Object.values(data);
+
+      // Actualiza dynamoData y dynamoOptions con los nuevos datos
+      setMongodbData({
+        labels: labels,
+        datasets: [
+          {
+            label: 'Datos 1',
+            backgroundColor: 'rgba(255, 72, 0, 1)',
+            borderColor: 'rgba(0, 0, 0, 1)',
+            borderWidth: 1,
+            data: values,
+          },
+        ],
+      });
+      
+      setMongoOptions({
+        scales: {
+          x: {
+            type: 'category',
+            labels: labels,
+          },
+          y: {
+            beginAtZero: true,
+          },
+        },
+      });
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
 
   const [selectedValue, setSelectedValue] = useState(null);
@@ -158,8 +230,10 @@ function App() {
       <ComboBox onChange={(selected) => setSelectedValue(selected)} />
       <button onClick={onDynamo}>Dynamo</button>
       <button onClick={onMysql}>Mysql</button>
+      <button onClick={onMongodb}>MongoBD</button>
       <BarChart data={dynamoData} options={dynamoOptions} />
       <BarChart data={MysqlData} options={MysqlOptions} />
+      <BarChart data={MongodbData} options={MongoOptions}></BarChart>
     </div>
   );
 }
